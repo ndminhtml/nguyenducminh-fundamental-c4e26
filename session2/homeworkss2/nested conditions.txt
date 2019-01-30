@@ -1,0 +1,10 @@
+nested conditions la nhom cau dieu kien hoac là long cac cau lenh sao cho cau lenh nay nam trong cau lenh khac
+
+1 doan code su dung nested conditions
+
+	if x > 0:
+		print("x là so duong ")
+	elif x < 0:
+		print("x là so am ")
+	else:
+		print("x = 0 ")
