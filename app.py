@@ -1,30 +1,22 @@
 from flask import Flask, render_template, request
+import food 
+
 app = Flask(__name__)
 
-items =[
-    {
-        "name" : "Com rang",
-        "price": 25000,
-    }, 
-    {
-        "name": "Pho bo",
-        "price": 30000,
-    }, 
-    {
-        "name": "Xoi xeo",
-        "price": 15000,
-    }, 
-]
+@app.route("/food_list")
+def food_list():
+   # Get ALL Food
+    all_food = food.get({})
 
-@app.route("/") #ALL => List/Master
-def menu():
-    return render_template("menu.html", items_list= items, user= "Minh")
+   #Render: ALL Food + HTML
 
+   #Return
+    return render_template("food_list.html" , all_food = all_food)
 
-
-@app.route("/food/<int:i>")
-def food(i):
-    return render_template("food_detail.html", items = items[i] ) # 1 => Detail
+@app.route("/food/<id>")
+def food_detail(id):
+    f = food.get_by_id(id)
+    return render_template("food_detail.html", food=f )
 
 @app.route("/add_food", methods=["GET", "POST"])
 def add_food():
@@ -34,12 +26,7 @@ def add_food():
         form = request.form
         n = form["name"]
         p = form["price"]
-        new_item = {
-            "name": n,
-            "price": p,
-        }
-        items.append(new_item)
-        return n + " added " 
+        food.add_food(n, p)
 
 if __name__ == '__main__':
   app.run(debug=True)

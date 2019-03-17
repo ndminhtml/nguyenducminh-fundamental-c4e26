@@ -6,11 +6,13 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 </head>
-<body>
-    <h3>Xin chao {{user}}</h3>
-    {% for items in items_list %}
-        <h4>{{ items.name }} </h4>
-        <a href="/food/{{ loop.index0 }}">Detail</a>
-    {% endfor %}
+<body style="background-color:powderblue;">
+    <h1>Food List</h1>
+    
+    {% for f in all_food %}
+        <h3>{{ f.name }}</h3>
+        <div>{{ f.price }}</div>
+        <a href="/food/{{ f._id }}">Detail</a>
+        {% endfor %}
 </body>
 </html>
